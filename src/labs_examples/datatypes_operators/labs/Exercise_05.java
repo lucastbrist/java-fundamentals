@@ -19,6 +19,13 @@ class LogicalOperators {
 
         // write your code below
 
+        System.out.println("a and b = " +(a & b));
+        System.out.println("a and b = " +(a && b));
+        System.out.println("a or b = " +(a || b));
+        System.out.println("a xor b = " +(a ^ b));
+        System.out.println("not a = " +(!a));
+        System.out.println("not b = " +(!b));
+
     }
 
 }
