@@ -26,7 +26,7 @@ public class Exercise_06 {
         double top;
         double bottom = top = Math.PI * (Math.pow(r, 2));
         System.out.println("The top and bottom surface area of the cylinder is " + bottom);
-        System.out.println("The total surface area of the cylinder is " + (top + bottom + larea) + (2 * Math.PI * Math.pow(r, 2)) + (2 * Math.PI * (r * h)));
+        System.out.println("The total surface area of the cylinder is " + (top + bottom + larea));
         System.out.println("Congratulations. That sucked, right?");
 
     }
