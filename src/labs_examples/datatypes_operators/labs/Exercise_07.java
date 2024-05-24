@@ -25,5 +25,8 @@ public class Exercise_07 {
 
         // write completed code here
 
+        int d2s = days * 86400;
+        System.out.println("There are " + d2s + " seconds in " + days + " days.");
+
     }
 }
