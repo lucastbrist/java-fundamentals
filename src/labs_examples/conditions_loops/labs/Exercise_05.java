@@ -1,5 +1,7 @@
 package labs_examples.conditions_loops.labs;
 
+import java.util.Scanner;
+
 /**
  * Conditions and Loops Exercise 5: Calculator
  *
@@ -19,7 +21,19 @@ public class Exercise_05 {
 
     public static void main(String args[]) {
 
+        System.out.println("Hi! Please type a number. :)");
+        Scanner scanner1 = new Scanner(System.in);
+        int num1 = scanner1.nextInt();
+        System.out.println("Hi again! Please type another number, this one higher than the first.");
+        Scanner scanner2 = new Scanner(System.in);
+        int num2 = scanner2.nextInt();
+        int sum = 0;
+        float average = ((float) (num1 + num2) / 2);
 
-
+        for(int i = 1; i <= num2; i++){
+            sum += i;
+            System.out.println("The sum is: " + sum);
+            System.out.println("The average is: " + average);
+        }
     }
 }
