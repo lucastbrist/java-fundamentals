@@ -1,6 +1,6 @@
 package labs_examples.conditions_loops.examples;
 
-// Use commas in a for statememt.
+// Use commas in a for statement.
 class Comma {
     public static void main(String args[]) {
         int i, j;
