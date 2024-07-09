@@ -3,34 +3,39 @@ package labs_examples.objects_classes_methods.labs.objects;
 public class AirplaneLab {
     public static void main(String[] args) {
 
-        engine myEngine = new engine(1, 5700);
+        airplaneEngine myAirplaneEngine = new airplaneEngine(1, 5700);
         fuselage myFuselage = new fuselage(11.5, 60);
         PASystem myPASystem = new PASystem(false, false);
         seats mySeats = new seats("pleather", false);
 
-    Airplane myAirplane = new Airplane(myEngine, myFuselage, myPASystem, mySeats, "Titanic of the Air",
+    Airplane myAirplane = new Airplane(myAirplaneEngine, myFuselage, myPASystem, mySeats, "Titanic of the Air",
                                  "Airgate", 60, 40, 12000,2300);
 
-        System.out.println("I am currently flying a " + myAirplane.airline + " plane named '" + myAirplane.name +
-                           "' with a wingspan of " + myAirplane.wingspan + " feet and " + myAirplane.passengers +
-                           " passengers and a fuselage length of " + myAirplane.fuselage.length +
-                           " feet and a turbine count of " + myAirplane.engine.turbineCount + ". It's not going good up here." +
-                           " Of the " + myAirplane.fuelCapacity + " gallons of fuel, there is " + myAirplane.currentFuelLevel +
+        System.out.println("I am currently flying a " + myAirplane.getAirline() + " plane named '" + myAirplane.getName() +
+                           "' with a wingspan of " + myAirplane.getWingspan() + " feet and " + myAirplane.getPassengers() +
+                           " passengers and a fuselage length of " + myAirplane.getFuselage().getLength() +
+                           " feet and a turbine count of " + myAirplane.getEngine().getTurbineCount() + ". It's not going good up here." +
+                           " Of the " + myAirplane.getFuelCapacity() + " gallons of fuel, there is " + myAirplane.getCurrentFuelLevel() +
                            " remaining. We are going to crash. Send help.");
+
+        System.out.println("Computer, print the information for this plane so that the people trying to help can have " +
+                           "all the info they need!");
+        System.out.println("Computer: OK. Here:");
+        System.out.println(myAirplane.toString());
 
     }
 
 }
 
-class engine {
+class airplaneEngine {
 
-    int turbineCount;
-    int thrust;
+    private int turbineCount;
+    private int thrust;
 
-    public engine() {
+    public airplaneEngine() {
     }
 
-    public engine(int turbineCount, int thrust) {
+    public airplaneEngine(int turbineCount, int thrust) {
         this.turbineCount = turbineCount;
         this.thrust = thrust;
     }
@@ -53,7 +58,7 @@ class engine {
 
     @Override
     public String toString() {
-        return "engine{" +
+        return "airplaneEngine{" +
                 "turbineCount=" + turbineCount +
                 ", thrust=" + thrust +
                 '}';
@@ -62,8 +67,8 @@ class engine {
 
 class fuselage {
 
-    double cabinPressure;
-    double length;
+    private double cabinPressure;
+    private double length;
 
     public fuselage() {
     }
@@ -99,8 +104,8 @@ class fuselage {
 }
 
 class PASystem {
-    boolean isPilotFunny;
-    boolean isLegible;
+    private boolean isPilotFunny;
+    private boolean isLegible;
 
     public PASystem() {
     }
@@ -136,8 +141,8 @@ class PASystem {
 }
 
 class seats {
-    String seatMaterial;
-    boolean isComfortable;
+    private String seatMaterial;
+    private boolean isComfortable;
 
     public seats() {
     }
@@ -174,25 +179,25 @@ class seats {
 
 class Airplane {
 
-    engine engine;
-    fuselage fuselage;
-    PASystem PASystem;
-    seats seats;
+    private airplaneEngine airplaneEngine;
+    private fuselage fuselage;
+    private PASystem PASystem;
+    private seats seats;
 
-    String name;
-    String airline;
-    int wingspan;
-    int passengers;
-    double fuelCapacity;
-    double currentFuelLevel;
+    private String name;
+    private String airline;
+    private int wingspan;
+    private int passengers;
+    private double fuelCapacity;
+    private double currentFuelLevel;
 
     public Airplane() {
     }
 
-    public Airplane(engine engine, fuselage fuselage, PASystem PASystem, seats seats,
+    public Airplane(airplaneEngine airplaneEngine, fuselage fuselage, PASystem PASystem, seats seats,
                     String name, String airline, int wingspan, int passengers,
                     double fuelCapacity, double currentFuelLevel) {
-        this.engine = engine;
+        this.airplaneEngine = airplaneEngine;
         this.fuselage = fuselage;
         this.PASystem = PASystem;
         this.seats = seats;
@@ -204,12 +209,12 @@ class Airplane {
         this.currentFuelLevel = currentFuelLevel;
     }
 
-    public engine getEngine() {
-        return engine;
+    public airplaneEngine getEngine() {
+        return airplaneEngine;
     }
 
-    public void setEngine(engine engine) {
-        this.engine = engine;
+    public void setEngine(airplaneEngine airplaneEngine) {
+        this.airplaneEngine = airplaneEngine;
     }
 
     public fuselage getFuselage() {
@@ -287,7 +292,7 @@ class Airplane {
     @Override
     public String toString() {
         return "Airplane{" +
-                "engine=" + engine +
+                "airplaneEngine=" + airplaneEngine +
                 ", fuselage=" + fuselage +
                 ", PASystem=" + PASystem +
                 ", seats=" + seats +
