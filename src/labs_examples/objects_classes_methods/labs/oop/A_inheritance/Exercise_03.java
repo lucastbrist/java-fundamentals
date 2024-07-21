@@ -4,7 +4,7 @@ package labs_examples.objects_classes_methods.labs.oop.A_inheritance;
  * Why does the output print in the order it does?
  *
  * You answer:
- *
+ * Because, like in real life, the parents must come before a child.
  */
 
 class A_1 {
