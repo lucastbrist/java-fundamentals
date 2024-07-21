@@ -1,7 +1,7 @@
 
 Without running the code below, please tell me what it will print.
 
-
+ANSWER: The text "Child called" will print, as the doSomething() method is overridden in the child subclass.
 
 public class InheritanceTest
 {
