@@ -1,7 +1,8 @@
 
 Without running the code below, please tell me what will print. Why?
 
-
+ANSWER: Both "Parent called" and "Child called" will print, in that order. This is like in exercise 3.
+There is no overriding, so both are called in succession and then printed.
 
 
 public class InheritanceTest
