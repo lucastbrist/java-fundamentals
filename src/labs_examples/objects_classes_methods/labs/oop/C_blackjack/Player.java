@@ -74,5 +74,16 @@ public class Player {
                 ", potValue=" + potValue +
                 '}';
     }
+
+    public boolean computerAI(Hand computerHand) {
+
+        boolean answer = false;
+        int handValue = computerHand.getHandValue();
+        if (handValue < 16) {
+            answer = true;
+        }
+        return answer;
+    }
+
 }
 

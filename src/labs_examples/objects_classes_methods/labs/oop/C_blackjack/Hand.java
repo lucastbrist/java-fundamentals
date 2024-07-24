@@ -46,4 +46,25 @@ public class Hand {
                 ", handValue=" + handValue +
                 '}';
     }
+
+    public boolean isGreaterThan21(Hand hand) {
+
+        boolean answer = false;
+        int handValue = hand.getHandValue();
+        if (handValue >= 21) {
+            answer = true;
+        }
+        return answer;
+    }
+
+    public int getHandScore(Hand hand) {
+
+        int count = 0;
+        for (Card c : hand.getCards()) {
+            count += c.getCardValue();
+        }
+        
+        return count;
+    }
 }
+
