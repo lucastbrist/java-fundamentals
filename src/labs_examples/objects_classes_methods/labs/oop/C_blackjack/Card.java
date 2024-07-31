@@ -4,13 +4,15 @@ import java.util.Arrays;
 
 public class Card {
 
-    char[] suit = new char[]{'♠', '♦', '♥', '♣'};
+    char suit;
     int cardValue;
 
     public Card() {
+        char suit;
+        int cardValue;
     }
 
-    public Card(char[] suit) {
+    public Card(char suit) {
         this.suit = suit;
     }
 
@@ -18,16 +20,16 @@ public class Card {
         this.cardValue = cardValue;
     }
 
-    public Card(char[] suit, int cardValue) {
+    public Card(char suit, int cardValue) {
         this.suit = suit;
         this.cardValue = cardValue;
     }
 
-    public char[] getSuit() {
+    public char getSuit() {
         return suit;
     }
 
-    public void setSuit(char[] suit) {
+    public void setSuit(char suit) {
         this.suit = suit;
     }
 
@@ -42,7 +44,7 @@ public class Card {
     @Override
     public String toString() {
         return "Card{" +
-                "suit=" + Arrays.toString(suit) +
+                "suit=" + (suit) +
                 ", cardValue=" + cardValue +
                 '}';
     }

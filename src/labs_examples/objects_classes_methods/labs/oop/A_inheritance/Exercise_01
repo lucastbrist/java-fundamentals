@@ -7,7 +7,7 @@ yourself.
 
 2) Once you've created this hierarchy, demonstrate the use of non-default constructors in the parent classes. Meaning,
 use the super(arg1, arg2, ...) command from a subclass to invoke a parameterized constructor in the parent class. Do this
-at least once, several times over would be better.
+at least once, several times over would be better. DONE
 
 3) Create at least three methods that override a method in one or more parent classes.
 

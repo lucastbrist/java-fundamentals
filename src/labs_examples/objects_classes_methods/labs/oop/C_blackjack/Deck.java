@@ -9,6 +9,8 @@ public class Deck {
     ArrayList<Integer> usedCards;
 
     public Deck() {
+        this.cards = new Card[52];
+        this.usedCards = new ArrayList<>();
     }
 
     public Deck(Card[] cards) {
@@ -48,78 +50,36 @@ public class Deck {
                 '}';
     }
 
-    public void populateDeck(Deck deck) {
+    public void populateDeck() {
 
-        Card aceOfSpades = new Card(new char[]{'♠'}, 1);
-        Card twoOfSpades = new Card(new char[]{'♠'}, 2);
-        Card threeOfSpades = new Card(new char[]{'♠'}, 3);
-        Card fourOfSpades = new Card(new char[]{'♠'}, 4);
-        Card fiveOfSpades = new Card(new char[]{'♠'}, 5);
-        Card sixOfSpades = new Card(new char[]{'♠'}, 6);
-        Card sevenOfSpades = new Card(new char[]{'♠'}, 7);
-        Card eightOfSpades = new Card(new char[]{'♠'}, 8);
-        Card nineOfSpades = new Card(new char[]{'♠'}, 9);
-        Card tenOfSpades = new Card(new char[]{'♠'}, 10);
-        Card jackOfSpades = new Card(new char[]{'♠'}, 10);
-        Card kingOfSpades = new Card(new char[]{'♠'}, 10);
-        Card queenOfSpades = new Card(new char[]{'♠'}, 10);
+        char[] suits = new char[]{'♠', '♦', '♥', '♣'};
+        int count = 0;
+        for (char c : suits) {
+            for (int i = 1; i <= 13; i++) {
+                this.cards[count++] = new Card(c, i);
+            }
 
-        Card aceOfDiamonds = new Card(new char[]{'♦'}, 1);
-        Card twoOfDiamonds = new Card(new char[]{'♦'}, 2);
-        Card threeOfDiamonds = new Card(new char[]{'♦'}, 3);
-        Card fourOfDiamonds = new Card(new char[]{'♦'}, 4);
-        Card fiveOfDiamonds = new Card(new char[]{'♦'}, 5);
-        Card sixOfDiamonds = new Card(new char[]{'♦'}, 6);
-        Card sevenOfDiamonds = new Card(new char[]{'♦'}, 7);
-        Card eightOfDiamonds = new Card(new char[]{'♦'}, 8);
-        Card nineOfDiamonds = new Card(new char[]{'♦'}, 9);
-        Card tenOfDiamonds = new Card(new char[]{'♦'}, 10);
-        Card jackOfDiamonds = new Card(new char[]{'♦'}, 10);
-        Card kingOfDiamonds = new Card(new char[]{'♦'}, 10);
-        Card queenOfDiamonds = new Card(new char[]{'♦'}, 10);
+        }
 
-        Card aceOfHearts = new Card(new char[]{'♥'}, 1);
-        Card twoOfHearts = new Card(new char[]{'♥'}, 2);
-        Card threeOfHearts = new Card(new char[]{'♥'}, 3);
-        Card fourOfHearts = new Card(new char[]{'♥'}, 4);
-        Card fiveOfHearts = new Card(new char[]{'♥'}, 5);
-        Card sixOfHearts = new Card(new char[]{'♥'}, 6);
-        Card sevenOfHearts = new Card(new char[]{'♥'}, 7);
-        Card eightOfHearts = new Card(new char[]{'♥'}, 8);
-        Card nineOfHearts = new Card(new char[]{'♥'}, 9);
-        Card tenOfHearts = new Card(new char[]{'♥'}, 10);
-        Card jackOfHearts = new Card(new char[]{'♥'}, 10);
-        Card kingOfHearts = new Card(new char[]{'♥'}, 10);
-        Card queenOfHearts = new Card(new char[]{'♥'}, 10);
+    }
 
-        Card aceOfClubs = new Card(new char[]{'♣'}, 1);
-        Card twoOfClubs = new Card(new char[]{'♣'}, 2);
-        Card threeOfClubs = new Card(new char[]{'♣'}, 3);
-        Card fourOfClubs = new Card(new char[]{'♣'}, 4);
-        Card fiveOfClubs = new Card(new char[]{'♣'}, 5);
-        Card sixOfClubs = new Card(new char[]{'♣'}, 6);
-        Card sevenOfClubs = new Card(new char[]{'♣'}, 7);
-        Card eightOfClubs = new Card(new char[]{'♣'}, 8);
-        Card nineOfClubs = new Card(new char[]{'♣'}, 9);
-        Card tenOfClubs = new Card(new char[]{'♣'}, 10);
-        Card jackOfClubs = new Card(new char[]{'♣'}, 10);
-        Card kingOfClubs = new Card(new char[]{'♣'}, 10);
-        Card queenOfClubs = new Card(new char[]{'♣'}, 10);
+    public void deal(Player player) {
 
+        //Do not call this method before first calling populateDeck()!
 
-        deck.cards = new Card[]{aceOfSpades, aceOfDiamonds, aceOfHearts, aceOfClubs,
-                                twoOfSpades, twoOfDiamonds, twoOfHearts, twoOfClubs,
-                                threeOfSpades, threeOfDiamonds, threeOfHearts, threeOfClubs,
-                                fourOfSpades, fourOfDiamonds, fourOfHearts, fourOfClubs,
-                                fiveOfSpades, fiveOfDiamonds, fiveOfHearts, fiveOfClubs,
-                                sixOfSpades, sixOfDiamonds, sixOfHearts, sixOfClubs,
-                                sevenOfSpades, sevenOfDiamonds, sevenOfHearts, sevenOfClubs,
-                                eightOfSpades, eightOfDiamonds, eightOfHearts, eightOfClubs,
-                                nineOfSpades, nineOfDiamonds, nineOfHearts, nineOfClubs,
-                                tenOfSpades, tenOfDiamonds, tenOfHearts, tenOfClubs,
-                                jackOfSpades, jackOfDiamonds, jackOfHearts, jackOfClubs,
-                                kingOfSpades, kingOfDiamonds, kingOfHearts, kingOfClubs,
-                                queenOfSpades, queenOfDiamonds, queenOfHearts, queenOfClubs};
+        int cardNum;
+        boolean found = false;
+        while (!found) {
+        cardNum = (int)(Math.random()*52)+1;
+        if (this.usedCards.contains(cardNum)) {
+            continue;
+            } else {
+            this.usedCards.add(cardNum);
+            player.hand.cards.add(cards[cardNum]);
+            found = true;
+            }
+        }
+
     }
 
 }

@@ -7,6 +7,8 @@ public class Player {
     int potValue;
 
     public Player() {
+        this.name = "";
+        this.hand = new Hand();
     }
 
     public Player(String name) {
@@ -75,15 +77,10 @@ public class Player {
                 '}';
     }
 
-    public boolean computerAI(Hand computerHand) {
+    public boolean computerAI(Player computer) {
 
-        boolean answer = false;
-        int handValue = computerHand.getHandValue();
-        if (handValue < 16) {
-            answer = true;
-        }
-        return answer;
+        return (computer.hand.getHandValue() < 16);
+
     }
-
 }
 

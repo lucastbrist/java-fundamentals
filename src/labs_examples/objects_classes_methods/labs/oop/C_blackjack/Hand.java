@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Hand {
 
-    ArrayList<Card> cards;
+    ArrayList<Card> cards = new ArrayList<>();
     int handValue;
 
     public Hand() {
@@ -32,6 +32,7 @@ public class Hand {
     }
 
     public int getHandValue() {
+        this.getHandScore();
         return handValue;
     }
 
@@ -47,23 +48,23 @@ public class Hand {
                 '}';
     }
 
-    public boolean isGreaterThan21(Hand hand) {
+    public boolean isGreaterThan21() {
 
-        boolean answer = false;
-        int handValue = hand.getHandValue();
-        if (handValue >= 21) {
-            answer = true;
-        }
-        return answer;
+        this.getHandScore();
+        return (this.handValue >= 21);
     }
 
-    public int getHandScore(Hand hand) {
+    public int getHandScore() {
 
         int count = 0;
-        for (Card c : hand.getCards()) {
-            count += c.getCardValue();
+        for (Card c : this.cards) {
+            if (c.getCardValue() >= 10) {
+                count += 10;
+            } else {
+                count += c.getCardValue();
+            }
         }
-        
+        this.handValue = count;
         return count;
     }
 }
