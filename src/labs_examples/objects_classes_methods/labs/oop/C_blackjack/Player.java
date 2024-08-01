@@ -79,8 +79,15 @@ public class Player {
 
     public boolean computerAI(Player computer) {
 
-        return (computer.hand.getHandValue() < 16);
+        return (computer.hand.getHandValue() < 16 + (int)(Math.random()*2)+1);
 
     }
+
+    public void clearHand() {
+
+        this.hand.cards.clear();
+
+    }
+
 }
 

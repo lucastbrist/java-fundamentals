@@ -70,7 +70,7 @@ public class Deck {
         int cardNum;
         boolean found = false;
         while (!found) {
-        cardNum = (int)(Math.random()*52)+1;
+        cardNum = (int)(Math.random()*52);
         if (this.usedCards.contains(cardNum)) {
             continue;
             } else {
