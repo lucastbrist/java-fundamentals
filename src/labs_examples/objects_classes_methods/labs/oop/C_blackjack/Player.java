@@ -5,6 +5,8 @@ public class Player {
     String name;
     Hand hand;
     int potValue;
+    static int gamesPlayed;
+    static int gamesWon;
 
     public Player() {
         this.name = "";
@@ -66,6 +68,22 @@ public class Player {
 
     public void setPotValue(int potValue) {
         this.potValue = potValue;
+    }
+
+    public int getGamesPlayed() {
+        return gamesPlayed;
+    }
+
+    public void setGamesPlayed(int gamesPlayed) {
+        this.gamesPlayed = gamesPlayed;
+    }
+
+    public int getGamesWon() {
+        return gamesWon;
+    }
+
+    public void setGamesWon(int gamesWon) {
+        this.gamesWon = gamesWon;
     }
 
     @Override

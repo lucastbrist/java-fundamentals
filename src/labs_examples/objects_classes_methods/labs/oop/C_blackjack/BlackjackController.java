@@ -30,6 +30,10 @@ public class BlackjackController {
 
         while (player.getPotValue() > 0 & computer.getPotValue() > 0) {
 
+            System.out.println("You have played " + Player.gamesPlayed + " games of Blackjack.");
+            System.out.println("You have won " + Player.gamesWon + " games of Blackjack.");
+            System.out.println("You have lost " + (Player.gamesPlayed - Player.gamesWon) + " games of Blackjack.");
+
             deck.deal(player);
             deck.deal(player);
 
@@ -90,6 +94,7 @@ public class BlackjackController {
                 System.out.println("This was your opponent's score:");
                 System.out.println(computer.hand.toString());
                 System.out.println("You both lose! Better luck next time!");
+                Player.gamesPlayed++;
             }
             //Checking if player has more than 21
             else if (player.hand.handValue > 21) {
@@ -101,6 +106,7 @@ public class BlackjackController {
                 player.setPotValue(player.potValue - bet);
                 computer.setPotValue(computer.potValue + bet);
                 System.out.println("You lost! Better luck next time!");
+                Player.gamesPlayed++;
             }
             //Checking if computer has more than 21
             else if (computer.hand.handValue > 21) {
@@ -112,6 +118,8 @@ public class BlackjackController {
                 player.setPotValue(player.potValue + bet);
                 computer.setPotValue(computer.potValue - bet);
                 System.out.println("You won! Hope to see you again sometime!");
+                Player.gamesPlayed++;
+                Player.gamesWon++;
             }
             //Checking who wins if both have less than 21
             else {
@@ -124,12 +132,16 @@ public class BlackjackController {
                     player.setPotValue(player.potValue + bet);
                     computer.setPotValue(computer.potValue - bet);
                     System.out.println("You won! Hope to see you again sometime!");
+                    Player.gamesPlayed++;
+                    Player.gamesWon++;
                 } else if (computer.hand.handValue > player.hand.handValue) {
                     player.setPotValue(player.potValue - bet);
                     computer.setPotValue(computer.potValue + bet);
                     System.out.println("You lost! Better luck next time.");
+                    Player.gamesPlayed++;
                 } else {
                     System.out.println("You tied!");
+                    Player.gamesPlayed++;
                 }
             }
             player.clearHand();
