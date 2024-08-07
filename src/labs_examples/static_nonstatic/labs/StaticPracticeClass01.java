@@ -23,13 +23,13 @@ public class StaticPracticeClass01 {
 
     }
 
-// Doesn't work--static methods can't call non-static methods
-//    public static void sayThisAndThis(String string, String string2) {
-//
-//        System.out.println(string);
-//        sayThis(string2);
-//
-//    }
+    public static void sayThisAndThis(String string, String string2) {
+
+        StaticPracticeClass01 sayThis = new StaticPracticeClass01();
+        System.out.println(string);
+        sayThis.sayThis(string2);
+
+    }
 
     public static void sayThreeThings(String str, String str2, String str3) {
 

@@ -26,8 +26,8 @@ public class StaticPracticeClass02 {
 
     public void callAnotherNonstatic() {
 
-        // Why doesn't this work?
-        // sayThis("Hello, I am not static!");
+        StaticPracticeClass01 test = new StaticPracticeClass01();
+        test.sayThis("Hello, I am not static!");
 
     }
 
