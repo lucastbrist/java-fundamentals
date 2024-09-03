@@ -11,10 +11,13 @@ public class PlayerCharacter {
     int level = 1;
     static int baseStrength = 10;
     int strength;
+    int leveledStrength;
     static int baseSmarts = 10;
     int smarts;
+    int leveledSmarts;
     static int baseStealth = 10;
     int stealth;
+    int leveledStealth;
     static int baseHealth = 100;
     int health;
     static int baseDamage = 10;
@@ -103,6 +106,10 @@ public class PlayerCharacter {
         return baseStrength;
     }
 
+    public static void setBaseStrength(int baseStrength) {
+        PlayerCharacter.baseStrength = baseStrength;
+    }
+
     public int getStrength() {
         return strength;
     }
@@ -111,8 +118,20 @@ public class PlayerCharacter {
         this.strength = strength;
     }
 
+    public int getLeveledStrength() {
+        return leveledStrength;
+    }
+
+    public void setLeveledStrength(int leveledStrength) {
+        this.leveledStrength = leveledStrength;
+    }
+
     public static int getBaseSmarts() {
         return baseSmarts;
+    }
+
+    public static void setBaseSmarts(int baseSmarts) {
+        PlayerCharacter.baseSmarts = baseSmarts;
     }
 
     public int getSmarts() {
@@ -123,8 +142,20 @@ public class PlayerCharacter {
         this.smarts = smarts;
     }
 
+    public int getLeveledSmarts() {
+        return leveledSmarts;
+    }
+
+    public void setLeveledSmarts(int leveledSmarts) {
+        this.leveledSmarts = leveledSmarts;
+    }
+
     public static int getBaseStealth() {
         return baseStealth;
+    }
+
+    public static void setBaseStealth(int baseStealth) {
+        PlayerCharacter.baseStealth = baseStealth;
     }
 
     public int getStealth() {
@@ -133,6 +164,14 @@ public class PlayerCharacter {
 
     public void setStealth(int stealth) {
         this.stealth = stealth;
+    }
+
+    public int getLeveledStealth() {
+        return leveledStealth;
+    }
+
+    public void setLeveledStealth(int leveledStealth) {
+        this.leveledStealth = leveledStealth;
     }
 
     public static int getBaseHealth() {
@@ -232,59 +271,86 @@ public class PlayerCharacter {
 
         recalculateAttributes();
 
-        this.setLevel(this.getLevel() + 1);
-        int pointsToAllot = this.getLevel() + (this.getSmarts() / 2);
+        this.setLevel((this.getLevel() + 1));
+        int pointsToAllot = ((this.getLevel() + (this.getSmarts()) / 2));
+        int answer = 0;
         boolean allotting = true;
         Scanner scanner = new Scanner(System.in);
-        scanner.nextLine();
 
         System.out.println("You've leveled up!");
         System.out.println("You are now Level " + level);
 
+
         while (pointsToAllot > 0) {
+
+            allotting = true;
             while (allotting) {
 
+                recalculateAttributes();
                 System.out.println(stats());
                 System.out.println("You have " + pointsToAllot + " points to allot to your stats!");
                 System.out.println("How many points would you like to allot to your Strength");
+                answer = scanner.nextInt();
 
-                int answer = scanner.nextInt();
-                scanner.nextLine();
                 if (answer > pointsToAllot) {
                     System.out.println("You don't have that many points! Please try again.");
-                }
-                this.setStrength(strength + answer);
-                pointsToAllot -= answer;
-                allotting = false;
+                } else if (answer < 0) {
+                    System.out.println("You have typed a negative number! Please try again.");
+                } else
+                    allotting = false;
             }
-            allotting = true;
+
+            this.setLeveledStrength((this.getLeveledStrength() + answer));
+            pointsToAllot -= answer;
+
+            if (pointsToAllot > 0) {
+                allotting = true;
+            } else {
+                break;
+            }
             while (allotting) {
+
+                recalculateAttributes();
                 System.out.println(stats());
                 System.out.println("You have " + pointsToAllot + " points to allot to your stats!");
                 System.out.println("How many points would you like to allot to your Smarts?");
-                int answer = scanner.nextInt();
-                scanner.nextLine();
+                answer = scanner.nextInt();
+
                 if (answer > pointsToAllot) {
                     System.out.println("You don't have that many points! Please try again.");
-                }
-                this.setSmarts(smarts + answer);
-                pointsToAllot -= answer;
-                allotting = false;
+                } else if (answer < 0) {
+                    System.out.println("You have typed a negative number! Please try again.");
+                } else
+                    allotting = false;
             }
-            allotting = true;
+
+            this.setLeveledSmarts((this.getLeveledSmarts() + answer));
+            pointsToAllot -= answer;
+
+            if (pointsToAllot > 0) {
+                allotting = true;
+            } else {
+                break;
+            }
             while (allotting) {
+
+                recalculateAttributes();
                 System.out.println(stats());
                 System.out.println("You have " + pointsToAllot + " points to allot to your stats!");
                 System.out.println("How many points would you like to allot to your Stealth?");
-                int answer = scanner.nextInt();
-                scanner.nextLine();
+                answer = scanner.nextInt();
+
                 if (answer > pointsToAllot) {
                     System.out.println("You don't have that many points! Please try again.");
-                }
-                this.setStealth(stealth + answer);
-                pointsToAllot -= answer;
-                allotting = false;
+                } else if (answer < 0) {
+                    System.out.println("You have typed a negative number! Please try again.");
+                } else
+                    allotting = false;
             }
+
+            this.setLeveledStealth((this.getLeveledStealth() + answer));
+            pointsToAllot -= answer;
+
         }
 
         recalculateAttributes();
@@ -295,12 +361,30 @@ public class PlayerCharacter {
 
     public String stats() {
 
-        return "You are a Level " + this.getLevel() + " " + this.getRace() + " " + this.getCharacterClass() +
-                " named " + this.getName() + ". You " + "currently have " + (this.getStrength() + this.weapon.getStrengthModifier() + this.armor.getStrengthModifier() + this.trinket.getStrengthModifier()) + " Strength, " +
-                (this.getSmarts() + this.armor.getSmartsModifier() + this.trinket.getSmartsModifier()) + " Smarts, and " + (this.getStealth() + this.armor.getStealthModifier() + this.trinket.getStealthModifier()) + " Stealth. Your Health is "
-                + this.getHealth() + ", your weapon damage is " + this.getDamage() + ", your spell damage is " +
-                this.getSpellDamage() + ", and your armor rating is " + this.getArmorRating() + ". Your weapon is a " + this.weapon.getName() + " and your armor is " + this.armor.getName() + "."
-                + " You also have a trinket, " + this.trinket.getName() + ".";
+        recalculateAttributes();
+
+        return "You are a Level " + this.getLevel() + " " + this.getRace() + " " + this.getCharacterClass()
+                + " named " + this.getName()
+                + ". You currently have "
+                + (this.getStrength()
+                + this.weapon.getStrengthModifier()
+                + this.armor.getStrengthModifier()
+                + this.trinket.getStrengthModifier()) + " Strength, "
+                + (this.getSmarts()
+                + this.armor.getSmartsModifier()
+                + this.trinket.getSmartsModifier())
+                + " Smarts, and "
+                + (this.getStealth()
+                + this.armor.getStealthModifier()
+                + this.trinket.getStealthModifier())
+                + " Stealth. Your Health is " + this.getHealth()
+                + ", your weapon damage is " + this.getDamage()
+                + ", your spell damage is " + this.getSpellDamage()
+                + ", and your armor rating is " + this.getArmorRating()
+                + ". Your weapon is a " + this.weapon.getName()
+                + " and your armor is " + this.armor.getName() + "."
+                + " Your trinket is " + this.trinket.getName()
+                + ", and you have " + this.getGold() + " gold.";
 
     }
 
@@ -333,30 +417,72 @@ public class PlayerCharacter {
             this.setStealth(getBaseStealth() - 1);
         }
 
-        //Adding item modifiers
-        this.setStrength((this.getStrength() + this.weapon.getStrengthModifier() + this.armor.getStrengthModifier() + this.trinket.getStrengthModifier()));
-        this.setSmarts((this.getSmarts() + this.armor.getSmartsModifier() + this.trinket.getSmartsModifier()));
-        this.setStealth((this.getStealth() + this.armor.getStealthModifier() + this.trinket.getStealthModifier()));
+        //Adding item modifiers and allotted points
+        this.setStrength((this.getStrength()
+                + this.weapon.getStrengthModifier()
+                + this.armor.getStrengthModifier()
+                + this.trinket.getStrengthModifier()
+                + this.getLeveledStrength()));
+        this.setSmarts((this.getSmarts()
+                + this.armor.getSmartsModifier()
+                + this.trinket.getSmartsModifier()
+                + this.getLeveledSmarts()));
+        this.setStealth((this.getStealth()
+                + this.armor.getStealthModifier()
+                + this.trinket.getStealthModifier()
+                + this.getLeveledStealth()));
 
         //Health
         if (Objects.equals(this.getCharacterClass(), "Warrior")) {
-            this.setHealth(((this.getStrength() + this.armor.getStrengthModifier() + this.trinket.getStrengthModifier() + this.weapon.getStrengthModifier()) / 2) + getBaseHealth() + this.armor.getHealthModifier() + this.trinket.getHealthModifier() + 10);
+            this.setHealth(((this.getStrength()
+                    + this.armor.getStrengthModifier()
+                    + this.trinket.getStrengthModifier()
+                    + this.weapon.getStrengthModifier()) / 2)
+                    + getBaseHealth()
+                    + this.armor.getHealthModifier()
+                    + this.trinket.getHealthModifier() + 10);
         } else {
-            this.setHealth(((this.getStrength() + this.armor.getStrengthModifier() + this.trinket.getStrengthModifier() + this.weapon.getStrengthModifier()) / 2) + getBaseHealth() + this.armor.getHealthModifier() + this.trinket.getHealthModifier());
+            this.setHealth(((this.getStrength()
+                    + this.armor.getStrengthModifier()
+                    + this.trinket.getStrengthModifier()
+                    + this.weapon.getStrengthModifier()) / 2)
+                    + getBaseHealth()
+                    + this.armor.getHealthModifier()
+                    + this.trinket.getHealthModifier());
         }
 
         //Damage
         if (Objects.equals(this.getCharacterClass(), "Warrior")) {
-            this.setDamage(this.getStrength() + this.armor.getStrengthModifier() + this.trinket.getStrengthModifier() + this.trinket.getDamageModifier() + getBaseDamage() + this.weapon.getDamageRating() + 3);
+            this.setDamage(this.getStrength()
+                    + this.armor.getStrengthModifier()
+                    + this.trinket.getStrengthModifier()
+                    + this.trinket.getDamageModifier()
+                    + getBaseDamage()
+                    + this.weapon.getDamageRating() + 3);
         } else {
-            this.setDamage(this.getStrength() + this.armor.getStrengthModifier() + this.trinket.getStrengthModifier() + this.trinket.getDamageModifier() + getBaseDamage() + this.weapon.getDamageRating());
+            this.setDamage(this.getStrength()
+                    + this.armor.getStrengthModifier()
+                    + this.trinket.getStrengthModifier()
+                    + this.trinket.getDamageModifier()
+                    + getBaseDamage()
+                    + this.weapon.getDamageRating());
         }
 
         //Spell Damage
         if (Objects.equals(this.getCharacterClass(), "Sorcerer")) {
-            this.setSpellDamage(getBaseSpellDamage() + this.getSmarts() + this.armor.getSmartsModifier() + this.armor.getSpellDamageModifier() + this.trinket.getSmartsModifier() + this.trinket.getSpellDamageModifier() + 5);
+            this.setSpellDamage(getBaseSpellDamage()
+                    + this.getSmarts()
+                    + this.armor.getSmartsModifier()
+                    + this.armor.getSpellDamageModifier()
+                    + this.trinket.getSmartsModifier()
+                    + this.trinket.getSpellDamageModifier() + 5);
         } else {
-            this.setSpellDamage(getBaseSpellDamage() + this.getSmarts() + this.armor.getSmartsModifier() + this.armor.getSpellDamageModifier() + this.trinket.getSmartsModifier() + this.trinket.getSpellDamageModifier());
+            this.setSpellDamage(getBaseSpellDamage()
+                    + this.getSmarts()
+                    + this.armor.getSmartsModifier()
+                    + this.armor.getSpellDamageModifier()
+                    + this.trinket.getSmartsModifier()
+                    + this.trinket.getSpellDamageModifier());
         }
 
         //Armor Rating
@@ -751,9 +877,25 @@ public class PlayerCharacter {
         }
 
         this.recalculateAttributes();
+        this.rollLoot();
 
         System.out.println();
+        System.out.println("You set out on your adventure with" + this.getGold() + " spare coin.");
+
+        this.recalculateAttributes();
+        System.out.println();
         System.out.println(this.stats());
+
+    }
+
+    public void rollLoot(){
+
+        int gold = (((int)(Math.random()*100) * this.getLevel()) + 1);
+        if (Objects.equals(this.getCharacterClass(), "Thief")) {
+            gold = (gold * 2);
+        }
+
+        this.setGold(this.getGold() + gold);
 
     }
 
