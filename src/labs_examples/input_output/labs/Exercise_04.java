@@ -1,9 +1,6 @@
 package labs_examples.input_output.labs;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 
 /**
@@ -29,12 +26,10 @@ class Exercise_04 {
         try (BufferedReader br =
                      new BufferedReader(new FileReader(filePath))) {
 
-            System.out.println("Starting try...");
-
             String line;
 
             while ((line = br.readLine()) != null) {
-                System.out.println("In while...");
+
                 String[] values = line.split(",");
                 myNewObjects.add(mapValuesToObject(values));
             }
@@ -52,6 +47,19 @@ class Exercise_04 {
 
         String outputPath = "src/labs_examples/input_output/examples/csv_parser/POJOWrite.csv";
 
+        try (PrintWriter pw =
+                new PrintWriter(new PrintWriter(outputPath))) {
+
+            for (MyNewObject myObject : myNewObjects) {
+                pw.printf("%s,%d\n", myObject.name, myObject.number);
+
+            }
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 
