@@ -23,6 +23,8 @@ class Exercise_03 {
 
     public static void main(String[] args) {
 
+        System.out.println(sumOfTwo(44.4, 88.8));
+
         String string = "A man, a plan, a canal, Panama!";
         System.out.println(isPalindrome(string));
 
@@ -54,6 +56,12 @@ class Exercise_03 {
         for (int i : newIntsList) {
             System.out.println(i);
         }
+
+    }
+
+    public static <N extends Number> double sumOfTwo(N number1, N number2) {
+
+        return number1.doubleValue() + number2.doubleValue();
 
     }
 
