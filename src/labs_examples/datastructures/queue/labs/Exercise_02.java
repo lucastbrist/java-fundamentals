@@ -16,3 +16,13 @@ package labs_examples.datastructures.queue.labs;
  *      6) contain a method to print out the data of all elements in the Queue
  *
  */
+
+class exercise_02 {
+
+    public static void main(String[] args) {
+
+
+
+    }
+
+}

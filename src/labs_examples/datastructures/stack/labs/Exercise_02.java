@@ -18,3 +18,13 @@ package labs_examples.datastructures.stack.labs;
  *      TIP: To initialize a new array of a Generic type you can use this:
  *           T[] data = (T[]) new Object[10];
  */
+
+class exercise_02 {
+
+    public static void main(String[] args) {
+
+
+
+    }
+
+}

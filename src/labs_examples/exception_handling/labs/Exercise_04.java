@@ -7,3 +7,12 @@ package labs_examples.exception_handling.labs;
  *
  */
 
+class Exercise_04 {
+
+    public static void main(String[] args) {
+
+
+
+    }
+
+}

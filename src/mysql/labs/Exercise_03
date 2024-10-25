@@ -5,16 +5,66 @@
 *   Now that you have your air travel database all set up and populated, please demonstrate how to:
 *
 *       1.) Query all flights on a specific day
+        SELECT * FROM air_travel.flights WHERE flights.date = '2024-10-17';
+
 *       2.) Query all flights between two specific cities on a specific day
+        SELECT * FROM air_travel.flights WHERE flights.date = '2024-10-17' AND origin = '1' AND destination = '2';
+
 *       3.) Query all passengers on a specific flight between two specific cities today
+        SELECT first_name, last_name FROM passengers
+        JOIN passengers_flights ON passengers.id = passengers_flights.passenger_id_fk
+        JOIN flights ON flights.id = passengers_flights.flight_id_fk
+        WHERE flights.date = '2024-10-17' AND flights.origin = '1' AND flights.destination = '2';
+
 *       4.) Query the flight information for a specific passenger on a specific flight
+        SELECT * FROM flights
+        JOIN passengers_flights ON flights.id = passengers_flights.flight_id_fk
+        JOIN passengers ON passengers_flights.passenger_id_fk = passengers.id
+        WHERE passengers.id = '1' AND flights.id = '1';
+
 *       5.) Query the passenger information for a specific user on a specific flight yesterday
-*       6.) Query the number of flights between two specific cities this week, month, and year
+        SELECT * FROM passengers
+        JOIN passengers_flights ON passengers.id = passengers_flights.flight_id_fk
+        JOIN flights ON flights.id = passengers_flights.flight_id_fk
+        WHERE passengers.id = '1' AND flights.id = '1' AND flights.date = '2024-10-17';
+
+*       6.) Query the number of flights between two specific cities
+        SELECT count(flights.id) AS flights_amount
+        FROM flights
+        WHERE flights.origin = '1' AND flights.destination = '2';
+
 *       7.) Query the number of passengers that travelled between two specific cities today, this week, month and year
+        --week
+        SELECT count(passengers.id) AS passengers_amount FROM passengers
+        JOIN passengers_flights ON passengers.id = passengers_flights.passenger_id_fk
+        JOIN flights ON flights.id = passengers_flights.flight_id_fk
+        WHERE week(flights.date) = week(current_date()) AND flights.origin = '1' AND flights.destination = '2';
+
+        --month
+        SELECT count(passengers.id) AS passengers_amount FROM passengers
+        JOIN passengers_flights ON passengers.id = passengers_flights.passenger_id_fk
+        JOIN flights ON flights.id = passengers_flights.flight_id_fk
+        WHERE month(flights.date) = month(current_date()) AND flights.origin = '1' AND flights.destination = '2';
+
+        --year
+        SELECT count(passengers.id) AS passengers_amount FROM passengers
+        JOIN passengers_flights ON passengers.id = passengers_flights.passenger_id_fk
+        JOIN flights ON flights.id = passengers_flights.flight_id_fk
+        WHERE year(flights.date) = year(current_date()) AND flights.origin = '1' AND flights.destination = '2';
+
 *       8.) Insert records for new flights between airports
+        INSERT INTO flights (plane, pilot, date, origin, destination, estimated_travel_time)
+        values ('1', '1', '2024-10-17', '1', '2', '10 hours');
+
 *       9.) Insert records for new tickets and passengers on specific flights
+        INSERT INTO tickets (flight, cost, passenger)
+        values ('2', '600', '6');
+
 *       10.) Update meal preference (or something similar) for a specific passenger on a specific flight
 *       Bonus: Have some fun - get creative - what else can you do? Flex those SQL muscles and show us what
 *           you've got! :)
 *
+        UPDATE passengers
+        SET meal_pref = "All Juice"
+        WHERE id = '1';
 */
