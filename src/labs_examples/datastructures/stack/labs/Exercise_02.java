@@ -19,12 +19,4 @@ package labs_examples.datastructures.stack.labs;
  *           T[] data = (T[]) new Object[10];
  */
 
-class exercise_02 {
-
-    public static void main(String[] args) {
-
-
-
-    }
-
-}
+//done
